@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>MHacks 8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+    
+      <style>
+          .fontHead {
+              font-weight: 300;
+          }
+          
+          .parallax-container {
+              height: auto;
+          }
+      </style>
+      <!--Doesn't work unless you set the height and width like below-->
+       <style>
+      #map { 
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+
+    <body>
+  <nav class="grey lighten-2">
+    <div class="nav-wrapper">
+      <a class="brand-logo black-text" href="index.html">eXploit</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="AppsPage.html" class="black-text">Apps</a></li>
+        <li><a href="Methods.html" class="black-text">Methods</a></li>
+        <li><a href="APITest.html" class="black-text">API</a></li>
+      </ul>
+    </div>
+  </nav>
+    <h3>My Google Maps Demo</h3>
+    <!--api is below-->
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          map: map
+        });
+        map.addListener('center_changed', function() {
+          // 3 seconds after the center of the map has changed, pan back to the
+          // marker.
+          window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+          }, 3000);
+        });
+
+        marker.addListener('click', function() {
+        marker.setPosition(map.center());
+        });
+      }
+               function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+              marker.setAnimation(null);
+            } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+          }
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgdh48UvUHAmBnjzTE_TNy4jCAXC8TM8E&callback=initMap">
+    </script>
+  </body>
+</html>
