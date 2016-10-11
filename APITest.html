@@ -69,9 +69,11 @@
             map.panTo(marker.getPosition());
           }, 3000);
         });
-
-        marker.addListener('click', function() {
-        marker.setPosition(map.center());
+        google.maps.event.addListener(map, 'click', function(event) {
+        marker.setPosition(event.latLng);
+        window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+          }, 3000);
         });
       }
                function toggleBounce() {
